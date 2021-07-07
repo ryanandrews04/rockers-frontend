@@ -27,7 +27,7 @@ class PostCard extends Component {
 
                 <h5>{this.props.post.text}</h5>
 
-                {this.props.post.image ? <img alt="no img" src={this.props.post.image} /> : null}
+                {this.props.post.image ? <img alt={null} src={this.props.post.image} /> : null}
 
                 <br></br>
 

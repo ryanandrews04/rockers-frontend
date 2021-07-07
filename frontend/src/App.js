@@ -36,8 +36,15 @@ class App extends Component {
       .then(res => res.json())
       .then(userInfo => {
         localStorage.token = userInfo.token
-        this.setState
+        this.setState({
+          userInfo
+        })
       })
+  }
+
+  loginHandler = (e) => {
+    e.preventDefault();
+    this.login(e)
   }
 
   componentDidMount() {
@@ -84,13 +91,17 @@ class App extends Component {
 
   }
 
+  createPost = (postObj) => {
+    this.setState({ posts: [postObj, ...this.state.posts] })
+  }
+
 
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Navbar />
+          <Navbar userInfo={this.state.userInfo} logout={logout} />
 
           <Switch>
 
@@ -100,7 +111,7 @@ class App extends Component {
 
             <Route path="/home">
               {localStorage.token ? <button onClick={logout}>Logout</button> : null}
-              <PostContainer posts={this.state.posts} users={this.state.users} comments={this.state.comments} />
+              <PostContainer posts={this.state.posts} users={this.state.users} comments={this.state.comments} userInfo={this.state.userInfo} createPost={this.createPost} />
             </Route>
 
             <Route path="/signup">
@@ -108,8 +119,10 @@ class App extends Component {
             </Route>
 
             <Route path="/login" component={Login}>
-              <Login login={this.login} />
+              <Login login={this.login} loginHandler={this.loginHandler} userInfo={this.state.userInfo} />
             </Route>
+
+            {/* {localStorage.token && <Route exact path="/login"></Route> ? <Redirect to="/home" /> : null} */}
 
             <Route path="/tuner">
               <Tuner />

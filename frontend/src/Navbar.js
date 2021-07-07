@@ -40,14 +40,15 @@ class Navbar extends React.Component {
                             }}
                         >Tuner</NavLink>
 
-                        <NavLink
+                        {localStorage.token ? null : <NavLink
                             to="/login"
                             exact
                             style={link}
                             activeStyle={{
                                 background: 'grey'
                             }}
-                        >Login</NavLink>
+                        >Login</NavLink>}
+                        {localStorage.token ? <button style={link} onClick={this.props.logout}>Logout</button> : null}
                     </nav>
                 </span>
             </div>

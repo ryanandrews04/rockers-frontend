@@ -5,7 +5,7 @@ const Login = (props) => {
     return (
         <div>
             <h2>Login</h2>
-            <form onSubmit={(e) => props.login(e)}>
+            <form onSubmit={props.loginHandler}>
                 <label>Username</label>
                 <input name="username" type="text" />
                 <label>Password</label>
