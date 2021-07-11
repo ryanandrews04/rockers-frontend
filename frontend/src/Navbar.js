@@ -13,7 +13,7 @@ const link = {
 }
 
 
-class Navbar extends React.Component {
+class Navbar extends Component {
 
     render() {
         return (

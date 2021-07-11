@@ -16,7 +16,7 @@ class App extends Component {
     users: [],
     posts: [],
     comments: [],
-    userInfo: []
+    userInfo: [],
   }
 
 
@@ -91,9 +91,87 @@ class App extends Component {
 
   }
 
-  createPost = (postObj) => {
+  createPost = (postObj) =>
     this.setState({ posts: [postObj, ...this.state.posts] })
+
+
+  deletePost = (postObj) => {
+    const newPostsArr = this.state.posts.filter(post => post.id !== postObj.id)
+    this.setState({
+      posts: newPostsArr
+    })
+    fetch(`http://localhost:3000/api/v1/posts/${postObj.id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json"
+      },
+    })
+      .then(res => res.json())
+      .then(() => {
+        this.setState({
+          posts: newPostsArr
+        })
+        alert("Deleted post")
+
+      })
   }
+
+  updatePost = (e, updatedPostText, postObj) => {
+    e.preventDefault()
+    let updatedPost = {
+      title: postObj.title,
+      text: `${postObj.text} Edit: ${updatedPostText}`,
+      user_id: postObj.user_id
+    }
+    fetch(`http://localhost:3000/api/v1/posts/${postObj.id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedPost),
+    })
+      .then(res => res.json())
+      .then(newPostObj => {
+        this.setState({
+          posts: this.state.posts.map(post => {
+            if (post.id === newPostObj.id) return newPostObj
+            else return post
+          })
+        })
+      })
+
+  }
+
+  updateComment = (e, updatedCommentText, commentObj) => {
+    e.preventDefault()
+    let updatedComment = {
+      text: `${commentObj.text} Edit: ${updatedCommentText}`,
+      user_id: commentObj.user_id,
+      post_id: commentObj.post_id
+    }
+    fetch(`http://localhost:3000/api/v1/comments/${commentObj.id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedComment),
+    })
+      .then(res => res.json())
+      .then(newCommentObj => {
+        this.setState({
+          comments: this.state.comments.map(comment => {
+            if (comment.id === newCommentObj.id) return newCommentObj
+            else return comment
+          })
+        })
+      })
+
+  }
+
+
 
 
 
@@ -110,8 +188,7 @@ class App extends Component {
             </Route>
 
             <Route path="/home">
-              {localStorage.token ? <button onClick={logout}>Logout</button> : null}
-              <PostContainer posts={this.state.posts} users={this.state.users} comments={this.state.comments} userInfo={this.state.userInfo} createPost={this.createPost} />
+              <PostContainer posts={this.state.posts} users={this.state.users} comments={this.state.comments} userInfo={this.state.userInfo} createPost={this.createPost} deletePost={this.deletePost} updatePost={this.updatePost} updateComment={this.updateComment} />
             </Route>
 
             <Route path="/signup">

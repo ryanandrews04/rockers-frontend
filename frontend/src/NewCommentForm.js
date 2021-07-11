@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-class NewPostForm extends Component {
+class NewCommentForm extends Component {
 
     state = {
-        title: "",
         text: "",
-        image: "",
+        image: ""
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/api/v1/posts', {
+        fetch('http://localhost:3000/api/v1/comments', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -18,25 +17,18 @@ class NewPostForm extends Component {
             },
             body: JSON.stringify({
                 user_id: this.props.userInfo.user.id,
-                title: this.state.title,
                 text: this.state.text,
-                image: this.state.image
+                image: this.state.image,
+                post_id: this.props.post_id
             })
         })
             .then(res => res.json())
-            .then(newPost => {
-
-
-                this.props.createPost(newPost)
+            .then(newComment => {
+                this.props.createComment(newComment)
                 this.setState({
-                    title: "",
                     text: "",
                     image: ""
                 })
-                this.props.handleChange()
-
-
-
             })
     }
 
@@ -45,8 +37,7 @@ class NewPostForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} type="text" placeholder="title"></input>
-                    <input value={this.state.text} onChange={(e) => this.setState({ text: e.target.value })} type="text" placeholder="Type your post here"></input>
+                    <input value={this.state.text} onChange={(e) => this.setState({ text: e.target.value })} type="text" placeholder="Type your comment here"></input>
                     <input value={this.state.image} onChange={(e) => this.setState({ image: e.target.value })} type="text" placeholder="Optional image URL here"></input>
                     <input type="submit" name="submit" value="Post"></input>
                 </form>
@@ -55,4 +46,4 @@ class NewPostForm extends Component {
     }
 }
 
-export default NewPostForm;
+export default NewCommentForm;
