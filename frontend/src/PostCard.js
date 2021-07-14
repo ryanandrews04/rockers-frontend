@@ -47,7 +47,7 @@ class PostCard extends Component {
         // const user = (this.props.users.filter(user => user.id === this.props.post.user_id))
 
         return (
-            <div className="card" style={{ margin: "5px", color: "#000", background: "gray" }}>
+            <div className="postCard" >
 
                 {/* <h5>{user[0].username}:</h5> */}
                 <br></br>
@@ -72,7 +72,7 @@ class PostCard extends Component {
 
                 <h5>{this.props.post.text}</h5>
 
-                {this.props.post.image ? <img alt={""} src={this.props.post.image} /> : null}
+                {this.props.post.image ? <img alt={""} className={"postImage"} src={this.props.post.image} /> : null}
 
                 <br></br>
 

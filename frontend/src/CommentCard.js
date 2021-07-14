@@ -40,11 +40,19 @@ class CommentCard extends Component {
 
         const user = (this.props.users.filter(user => user.id === this.props.comment.user_id))
 
+
         return (
-            <div className="card" style={{ color: "#000", background: "pink" }}>
+            <div className="commentCard">
 
 
-                <h5>{user[0].username}:</h5>
+                <h5 className={"userAndImage"}><img alt="" className={"usernameImg"} src={user[0].image} /><text className={"username"}>{user[0].username}:</text></h5>
+
+
+
+                <h5>{this.state.commentText}</h5>
+                {this.props.comment.image ? <img alt="" src={this.props.comment.image} className={"commentImage"} /> : null}
+
+                <br></br>
 
                 {this.props.userInfo.token ? (this.props.userInfo.user.id === this.props.comment.user_id ? <button onClick={this.handleDelete}>🗑</button> : null) : null}
 
@@ -60,12 +68,6 @@ class CommentCard extends Component {
                         </form>
                         : null
                 }
-
-                <h5>{this.state.commentText}</h5>
-                {this.props.comment.image ? <img alt="no img" src={this.props.comment.image} /> : null}
-
-
-
 
 
 

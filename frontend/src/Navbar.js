@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const link = {
     width: '100px',
@@ -10,49 +9,68 @@ const link = {
     color: 'white',
     borderRadius: '0 px',
 
+
 }
 
 
-class Navbar extends Component {
+function Navbar(props) {
 
-    render() {
-        return (
-            <div className={"navBar"}>
-                <span>
-                    <h1 className="mainHeader">Rockers</h1>
-                    <nav>
+    const history = useHistory()
 
-                        <NavLink
-                            to="/home"
-                            exact
-                            style={link}
-                            activeStyle={{
-                                background: 'grey'
-                            }}
-                        >Home</NavLink>
-
-                        <NavLink
-                            to="/tuner"
-                            exact
-                            style={link}
-                            activeStyle={{
-                                background: 'grey'
-                            }}
-                        >Tuner</NavLink>
-
-                        {localStorage.token ? null : <NavLink
-                            to="/login"
-                            exact
-                            style={link}
-                            activeStyle={{
-                                background: 'grey'
-                            }}
-                        >Login</NavLink>}
-                        {localStorage.token ? <button style={link} onClick={this.props.logout}>Logout</button> : null}
-                    </nav>
-                </span>
-            </div>
-        )
+    const logout = (e) => {
+        e.preventDefault()
+        localStorage.clear()
+        window.location.reload()
+        history.push('/home')
     }
+
+
+    return (
+        <div className={"navBar"}>
+            <span>
+                <h1 className="mainHeader">Rockers</h1>
+                <nav>
+
+                    <NavLink
+                        to="/home"
+                        exact
+                        style={link}
+                        activeStyle={{
+                            background: 'grey'
+                        }}
+                    >Home</NavLink>
+
+                    <NavLink
+                        to="/tuner"
+                        exact
+                        style={link}
+                        activeStyle={{
+                            background: 'grey'
+                        }}
+                    >Tuner</NavLink>
+
+                    <NavLink
+                        to="/profile"
+                        exact
+                        style={link}
+                        activeStyle={{
+                            background: 'grey'
+                        }}
+                    >My Profile</NavLink>
+
+                    {props.userInfo.token ? null : <NavLink
+                        to="/login"
+                        exact
+                        style={link}
+                        activeStyle={{
+                            background: 'grey'
+                        }}
+                    >Login</NavLink>}
+                    {props.userInfo.token ? <button style={link} onClick={logout}>Logout</button> : null}
+                </nav>
+            </span>
+        </div>
+    )
 }
+
 export default Navbar;

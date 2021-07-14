@@ -1,4 +1,6 @@
-const Signup = () => {
+import { useHistory } from 'react-router-dom'
+
+function Signup() {
 
     let signup = (e) => {
         e.preventDefault()
@@ -17,11 +19,19 @@ const Signup = () => {
             .then(console.log)
     }
 
+    const history = useHistory()
+
+    const signupHandler = (e) => {
+        e.preventDefault()
+        signup(e)
+        history.push('/login')
+    }
+
 
     return (
         <div>
             <h2>Signup</h2>
-            <form onSubmit={(e) => signup(e)}>
+            <form onSubmit={(e) => signupHandler(e)}>
                 <label>Username</label>
                 <input name="username" type="text" />
                 <label>Password</label>

@@ -17,8 +17,8 @@ class PostContainer extends Component {
     render() {
         return (
 
-            <div>
-                <button onClick={this.handleChange}>Create a new post</button>
+            <div className={"postContainer"}>
+                {this.props.userInfo.token ? <button onClick={this.handleChange}>Create a new post</button> : null}
                 {this.state.postForm ? <NewPostForm userInfo={this.props.userInfo} createPost={this.props.createPost} handleChange={this.handleChange} /> : null}
                 {this.props.posts.sort(function (a, b) { return b.id - a.id }).map(post => { return <PostCard post={post} key={post.id} users={this.props.users} comments={this.props.comments} userInfo={this.props.userInfo} deletePost={this.props.deletePost} updatePost={this.props.updatePost} updateComment={this.props.updateComment} /> })}
             </div>

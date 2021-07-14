@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Signup from './Signup'
 import Login from './Login'
 import Navbar from './Navbar';
 import PostContainer from './PostContainer';
 import Tuner from './Tuner';
+import MyProfile from './MyProfile';
+import style from './App.css';
 
-const logout = () => {
-  localStorage.clear()
-}
 
 class App extends Component {
 
@@ -40,6 +39,7 @@ class App extends Component {
           userInfo
         })
       })
+
   }
 
   loginHandler = (e) => {
@@ -171,15 +171,71 @@ class App extends Component {
 
   }
 
+  updateUserImage = (e, updatedImageUrl, userObj) => {
+    e.preventDefault()
+    let updatedUser = {
+      username: userObj.username,
+      bio: userObj.bio,
+      image: updatedImageUrl,
+      posts: userObj.posts,
+      comments: userObj.comments
 
+    }
+    fetch(`http://localhost:3000/api/v1/users/${userObj.id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then(res => res.json())
+      .then(newUserObj => {
+        this.setState({
+          users: this.state.users.map(user => {
+            if (user.id === newUserObj.id) return newUserObj
+            else return user
+          })
+        })
+      })
 
+  }
 
+  updateUserBio = (e, updatedBio, userObj) => {
+    e.preventDefault()
+    let updatedUser = {
+      username: userObj.username,
+      bio: updatedBio,
+      image: userObj.image,
+      posts: userObj.posts,
+      comments: userObj.comments
+
+    }
+    fetch(`http://localhost:3000/api/v1/users/${userObj.id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then(res => res.json())
+      .then(newUserObj => {
+        this.setState({
+          users: this.state.users.map(user => {
+            if (user.id === newUserObj.id) return newUserObj
+            else return user
+          })
+        })
+      })
+
+  }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Navbar userInfo={this.state.userInfo} logout={logout} />
+          <Navbar userInfo={this.state.userInfo} />
 
           <Switch>
 
@@ -196,7 +252,11 @@ class App extends Component {
             </Route>
 
             <Route path="/login" component={Login}>
-              <Login login={this.login} loginHandler={this.loginHandler} userInfo={this.state.userInfo} />
+              <Login login={this.login} loginHandler={this.loginHandler} userInfo={this.state.userInfo} history={useHistory} />
+            </Route>
+
+            <Route exact path="/login">
+              {localStorage.token ? <Redirect to="/home" /> : null}
             </Route>
 
             {/* {localStorage.token && <Route exact path="/login"></Route> ? <Redirect to="/home" /> : null} */}
@@ -204,6 +264,12 @@ class App extends Component {
             <Route path="/tuner">
               <Tuner />
             </Route>
+
+            <Route path="/profile">
+              <MyProfile posts={this.state.posts} comments={this.state.comments} users={this.state.users} userInfo={this.state.userInfo} updateUserImage={this.updateUserImage} updateUserBio={this.updateUserBio} />
+            </Route>
+
+
 
           </Switch>
 

@@ -46,9 +46,9 @@ class CommentContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className={"commentContainer"}>
                 <h3>Comments</h3>
-                <button onClick={this.handleChange}>Comment on this post</button>
+                {this.props.userInfo.token ? <button onClick={this.handleChange}>Comment on this post</button> : null}
                 {this.state.commentForm ? <NewCommentForm userInfo={this.props.userInfo} createComment={this.createComment} post_id={this.props.post_id} /> : null}
                 {this.state.comments.sort(function (a, b) { return b.id - a.id }).map(comment => { return <CommentCard users={this.props.users} comment={comment} key={comment.id} userInfo={this.props.userInfo} deleteComment={this.deleteComment} updateComment={this.props.updateComment} /> })}
 
