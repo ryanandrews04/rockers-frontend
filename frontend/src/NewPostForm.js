@@ -45,7 +45,7 @@ class NewPostForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} type="text" placeholder="title"></input>
+                    <input value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} type="text" placeholder="Title"></input>
                     <input value={this.state.text} onChange={(e) => this.setState({ text: e.target.value })} type="text" placeholder="Type your post here"></input>
                     <input value={this.state.image} onChange={(e) => this.setState({ image: e.target.value })} type="text" placeholder="Optional image URL here"></input>
                     <input type="submit" name="submit" value="Post"></input>

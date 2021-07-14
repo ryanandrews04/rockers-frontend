@@ -29,7 +29,7 @@ function Signup() {
 
 
     return (
-        <div>
+        <div className={"login"}>
             <h2>Signup</h2>
             <form onSubmit={(e) => signupHandler(e)}>
                 <label>Username</label>

@@ -4,12 +4,9 @@ const link = {
     width: '100px',
     padding: '12px',
     margin: '0 6px 6px',
-    background: 'lightgrey',
+    background: '#e2e2e2',
     textDecoration: 'none',
-    color: 'white',
-    borderRadius: '0 px',
-
-
+    color: 'black',
 }
 
 
@@ -32,6 +29,7 @@ function Navbar(props) {
                 <nav>
 
                     <NavLink
+                        className={"navBarLink"}
                         to="/home"
                         exact
                         style={link}
@@ -41,6 +39,7 @@ function Navbar(props) {
                     >Home</NavLink>
 
                     <NavLink
+                        className={"navBarLink"}
                         to="/tuner"
                         exact
                         style={link}
@@ -50,6 +49,7 @@ function Navbar(props) {
                     >Tuner</NavLink>
 
                     <NavLink
+                        className={"navBarLink"}
                         to="/profile"
                         exact
                         style={link}
@@ -59,6 +59,7 @@ function Navbar(props) {
                     >My Profile</NavLink>
 
                     {props.userInfo.token ? null : <NavLink
+                        className={"navBarLink"}
                         to="/login"
                         exact
                         style={link}
@@ -66,7 +67,7 @@ function Navbar(props) {
                             background: 'grey'
                         }}
                     >Login</NavLink>}
-                    {props.userInfo.token ? <button style={link} onClick={logout}>Logout</button> : null}
+                    {props.userInfo.token ? <NavLink className={"navBarLink"} to="/" exact style={link} onClick={logout} activeStyle={{ background: 'grey' }}>Logout</NavLink> : null}
                 </nav>
             </span>
         </div>

@@ -16,10 +16,10 @@ class UserPostCard extends Component {
     render() {
         return (
 
-            <div className="card" style={{ margin: "5px", color: "#000", background: "gray" }}>
+            <div className="postCard">
                 <h3>{this.props.post.title}</h3>
                 <h5>{this.props.post.text}</h5>
-                <button onClick={this.handleChange}>Comments</button>
+                <button className={"showComments"} onClick={this.handleChange}>Comments</button>
                 {this.state.viewComments ? <UserPostComments comments={this.props.comments.filter(comment => comment.post_id === this.props.post.id)} users={this.props.users} /> : null}
             </div>
         );

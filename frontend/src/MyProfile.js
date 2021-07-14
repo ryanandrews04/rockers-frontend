@@ -54,38 +54,42 @@ class MyProfile extends Component {
     render() {
 
         return (
-            <div>
+            <div >
                 {this.props.userInfo.token ?
+                    <div className={"profileImgAndBio"}>
+                        <div className={"myProfile"}>
+                            <div className={"myProfileImgDiv"}>
+                                <h1 className={"myProfileText"}>{this.props.userInfo.user.username}</h1>
 
-                    <div>
+                                <img className={"profileImg"} alt="" src={this.state.newUserImageUrl} />
 
-                        <h1>{this.props.userInfo.user.username}</h1>
+                                <button className={"editProfileBtn"} onClick={(e) => this.handleEditImage(e)}>{<img className={"editProfileBtnImg"} src="https://icons-for-free.com/iconfiles/png/512/camera-131965017355314519.png" />}</button>
 
-                        <img alt="" src={this.state.newUserImageUrl} />
+                                {this.state.editImage
+                                    ? <form onSubmit={this.submitImage}>
+                                        <input type="text" placeholder={"New Image URL"} onChange={(e) => this.handleUpdatedUserImage(e.target.value)}></input>
+                                        <input type="submit" name="submit" value="Save"></input>
+                                    </form>
+                                    : null
+                                }
+                            </div>
+                            <div className={"myProfileBioDiv"}>
+                                <h1 className={"myProfileText"}>About Me</h1>
 
-                        <button onClick={(e) => this.handleEditImage(e)}>Update Profile Picture</button>
+                                <h3 className={"myProfileText"}>{this.state.newUserBio}</h3>
 
-                        {this.state.editImage
-                            ? <form onSubmit={this.submitImage}>
-                                <input type="text" placeholder={"New Image URL"} onChange={(e) => this.handleUpdatedUserImage(e.target.value)}></input>
-                                <input type="submit" name="submit" value="Save"></input>
-                            </form>
-                            : null
-                        }
+                                <button className={"editBioBtn"} onClick={(e) => this.handleEditBio(e)}><img className={"editBioBtnImg"} src="https://www.pngitem.com/pimgs/m/114-1146547_new-post-new-post-icon-svg-hd-png.png" /></button>
 
-                        <h2>About Me</h2>
+                                {this.state.editBio
+                                    ? <form onSubmit={this.submitBio}>
+                                        <input type="text" placeholder={"New Bio"} onChange={(e) => this.handleUpdatedUserBio(e.target.value)}></input>
+                                        <input type="submit" name="submit" value="Save"></input>
+                                    </form>
+                                    : null
+                                }
 
-                        <h3>{this.state.newUserBio}</h3>
-
-                        <button onClick={(e) => this.handleEditBio(e)}>Update Bio</button>
-
-                        {this.state.editBio
-                            ? <form onSubmit={this.submitBio}>
-                                <input type="text" placeholder={"New Bio"} onChange={(e) => this.handleUpdatedUserBio(e.target.value)}></input>
-                                <input type="submit" name="submit" value="Save"></input>
-                            </form>
-                            : null
-                        }
+                            </div>
+                        </div>
 
                         <UserPostContainer posts={this.props.userInfo.user.posts} comments={this.props.comments} users={this.props.users} />
 
@@ -96,10 +100,10 @@ class MyProfile extends Component {
                     :
 
                     //If not logged in
-                    <div>
-                        <h1>Please login to view profile!</h1>
-                        <h3><a href="http://localhost:3001/login">Login</a></h3>
-                        <h3>Not a rocker yet? <a href="http://localhost:3001/signup">Register Here</a></h3>
+                    <div style={{ textAlign: "center", marginLeft: "30%", marginRight: "30%", background: "#e3e3e3", borderRadius: "10px", paddingTop: "10px", paddingBottom: "10px" }}>
+                        <h1 style={{ background: "#e3e3e3", borderRadius: "10px", color: "black" }} className={"myProfileText"}>Please login to view profile!</h1>
+                        <h3 style={{ background: "#e3e3e3", borderRadius: "10px", color: "black" }}><a href="http://localhost:3001/login">Login</a></h3>
+                        <h3 style={{ background: "#e3e3e3", borderRadius: "10px", color: "black" }}>Not a rocker yet? <a href="http://localhost:3001/signup">Register Here</a></h3>
                     </div>}
 
             </div>

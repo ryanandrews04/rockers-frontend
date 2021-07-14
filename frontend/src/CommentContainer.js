@@ -48,7 +48,7 @@ class CommentContainer extends Component {
         return (
             <div className={"commentContainer"}>
                 <h3>Comments</h3>
-                {this.props.userInfo.token ? <button onClick={this.handleChange}>Comment on this post</button> : null}
+                {this.props.userInfo.token ? <button className={"newCommentBtn"} onClick={this.handleChange}>{<img className={"newCommentBtnImg"} src="https://www.pngitem.com/pimgs/m/114-1146547_new-post-new-post-icon-svg-hd-png.png" />}</button> : null}
                 {this.state.commentForm ? <NewCommentForm userInfo={this.props.userInfo} createComment={this.createComment} post_id={this.props.post_id} /> : null}
                 {this.state.comments.sort(function (a, b) { return b.id - a.id }).map(comment => { return <CommentCard users={this.props.users} comment={comment} key={comment.id} userInfo={this.props.userInfo} deleteComment={this.deleteComment} updateComment={this.props.updateComment} /> })}
 

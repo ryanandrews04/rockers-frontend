@@ -55,6 +55,7 @@ body {
 .commentImage {
   height: auto;
   width: 50%;
+  padding-bottom: 15px;
 }
 
 .userAndImage {
@@ -73,4 +74,175 @@ body {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.navBarLink {
+  border-radius: 100px;
+  font-weight: bold;
+}
+
+.newPostBtn {
+  height: 36px;
+  position: relative;
+  left: -410px
+}
+
+.newPostBtnImg {
+  height: 30px;
+}
+
+.newCommentBtn {
+  height: 36px;
+  position: relative;
+  left: -238px
+}
+
+.newCommentBtnImg {
+  height: 30px;
+}
+
+.postNav {
+  text-align: left;
+  margin-left: 20px;
+  display: flex;
+}
+
+.deletePostBtn {
+  height: 36px;
+  width: 36px;
+}
+
+.deletePostBtnImg {
+  height: 30px;
+    left: -5px;
+    position: relative;
+}
+
+.editPostBtnImg {
+  height: 25px;
+  vertical-align: -5px;
+}
+
+.commentNav {
+  text-align: left;
+  margin-left: 5px;
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.deleteCommentBtn {
+  height: 36px;
+  width: 36px;
+}
+
+.deleteCommentBtnImg {
+  height: 30px;
+    left: -5px;
+    position: relative;
+}
+
+.editCommentBtnImg {
+  height: 25px;
+  vertical-align: -5px;
+}
+
+.showComments {
+  margin-bottom: 5px
+}
+
+.userCommentCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; 
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: grey;
+  padding-bottom: 3px;
+}
+
+.userCommentsCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; 
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: #e2e2e2;
+}
+
+.myProfile {
+  margin-left: 10%;
+  display: flex;
+  margin-right: 10%;
+  align-items: stretch;
+  margin-bottom: 10%;
+}
+
+.myProfileText {
+  color:#e2e2e2;
+}
+
+.profileUsernameImg {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  vertical-align: 5px;
+}
+
+.profileImg {
+  height: 400px;
+    width: auto;
+    border-radius: 30px;
+}
+
+.editProfileBtnImg {
+  height: 45px;
+  
+}
+
+.editProfileBtn {
+  height: 50px;
+  vertical-align: 6px;
+  border-radius: 30px;
+  width: 70px;
+}
+
+.editBioBtn {
+  height: 50px;
+  vertical-align: 6px;
+  border-radius: 30px;
+  width: 70px;
+  
+}
+
+.editBioBtnImg {
+  height: 40px;
+}
+
+.myProfileBioDiv {
+  display: flex;
+    text-align: left;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20%;
+
+}
+
+.myProfileImgDiv {
+  display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.login {
+  background: #e3e3e3;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
 }
