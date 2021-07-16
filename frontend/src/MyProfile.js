@@ -61,7 +61,7 @@ class MyProfile extends Component {
                             <div className={"myProfileImgDiv"}>
                                 <h1 className={"myProfileText"}>{this.props.userInfo.user.username}</h1>
 
-                                <img className={"profileImg"} alt="" src={this.state.newUserImageUrl} />
+                                <img className={"profileImg"} alt="Add a profile image!" src={this.state.newUserImageUrl} />
 
                                 <button className={"editProfileBtn"} onClick={(e) => this.handleEditImage(e)}>{<img className={"editProfileBtnImg"} src="https://icons-for-free.com/iconfiles/png/512/camera-131965017355314519.png" />}</button>
 
